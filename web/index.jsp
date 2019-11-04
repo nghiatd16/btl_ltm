@@ -24,7 +24,7 @@
                 response.sendRedirect("chat.jsp");
             }
             else{
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("register.jsp").forward(request, response);
             }
             %>
         </div>
