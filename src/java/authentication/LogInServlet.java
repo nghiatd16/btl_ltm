@@ -45,7 +45,7 @@ public class LogInServlet extends HttpServlet {
             out.println("<title>Servlet LogInServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogInServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -94,6 +94,7 @@ public class LogInServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

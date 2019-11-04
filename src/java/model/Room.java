@@ -75,7 +75,18 @@ public class Room {
         return new Room(id, rs.getString("name"), rs.getString("type"));
     }
     
-    private static Room createRoom(String name, String type) throws SQLException{
+    public static Room getRoomByName(String name) throws SQLException{
+        Database db = new Database(SystemConfig.MYSQL_HOST, SystemConfig.MYSQL_PORT, 
+                                    SystemConfig.MYSQL_Username, SystemConfig.MYSQL_Password, 
+                                    SystemConfig.MYSQL_TableName);
+        String query = "SELECT * FROM `rooms` WHERE `name`='"+name+"';";
+        ResultSet rs = db.executeQuery(query);
+        boolean hasRes = rs.next();
+        if(hasRes == false) return null;
+        return new Room(rs.getInt("id"), name, rs.getString("type"));
+    }
+    
+    public static Room createRoom(String name, String type) throws SQLException{
         try {
             Database db = new Database(SystemConfig.MYSQL_HOST, SystemConfig.MYSQL_PORT,
                     SystemConfig.MYSQL_Username, SystemConfig.MYSQL_Password,
@@ -161,5 +172,14 @@ public class Room {
             final_result.add(newRoom);
         }
         return final_result;
+    }
+    
+    public static void main(String[] args) {
+        try {
+            Room room = Room.getRoomById(2);
+            System.out.println(room);
+        } catch (SQLException ex) {
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
