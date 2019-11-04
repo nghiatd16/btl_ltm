@@ -75,6 +75,16 @@ public class RegisterServlet extends HttpServlet {
                 room.insertUserIntoRoom(user1.getId());
                 room.insertUserIntoRoom(user2.getId());
             }
+            
+            Room[] roomList1 = Room.getAllRoom();
+            for (Room room : roomList) {
+                String roomName = room.getName();
+                String[] userOfRoom = roomName.split("-");
+                User user1 = User.getUserByUsername(userOfRoom[0]);
+                User user2 = User.getUserByUsername(userOfRoom[1]);
+                room.insertUserIntoRoom(user1.getId());
+                room.insertUserIntoRoom(user2.getId());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
