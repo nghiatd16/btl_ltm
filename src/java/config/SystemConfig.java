@@ -11,7 +11,7 @@ package config;
  * @author nghia
  */
 public class SystemConfig {
-    public static String MYSQL_HOST = "localhost";
+    public static String MYSQL_HOST = "34.84.71.81";
     public static int MYSQL_PORT = 3306;
     public static String MYSQL_Username = "ltm";
     public static String MYSQL_Password = "ltm";
