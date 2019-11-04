@@ -53,13 +53,27 @@ public class RegisterServlet extends HttpServlet {
             String fullname = req.getParameter("fullname");
 
             User user = User.createUser(username, password, fullname);
-            User this_user = User.getUserByUsername(username);
+            
+            // Cách 1:
+            User userTemp = User.getUserByUsername(username);
             // tạo room chat 1-1 giữa user mới và từng user cũ
-            for (User user_temp : userList) {
-                Room room = Room.createRoom(username + "-" + user_temp.getUsername(), "11");
-                Room this_room = Room.getRoomByName(username + "-" + user_temp.getUsername());
-                this_room.insertUserIntoRoom(this_user.getId());
-                this_room.insertUserIntoRoom(user_temp.getId());
+            for (User u : userList) {
+                Room room = Room.createRoom(username + "-" + u.getUsername(), "11");
+                Room roomTemp = Room.getRoomByName(username + "-" + u.getUsername());
+                roomTemp.insertUserIntoRoom(userTemp.getId());
+                roomTemp.insertUserIntoRoom(u.getId());
+            }
+            
+            // Cách 2:
+            // lấy ra toàn bộ room
+            Room[] roomList = Room.getAllRoom();
+            for (Room room : roomList) {
+                String roomName = room.getName();
+                String[] userOfRoom = roomName.split("-");
+                User user1 = User.getUserByUsername(userOfRoom[0]);
+                User user2 = User.getUserByUsername(userOfRoom[1]);
+                room.insertUserIntoRoom(user1.getId());
+                room.insertUserIntoRoom(user2.getId());
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
