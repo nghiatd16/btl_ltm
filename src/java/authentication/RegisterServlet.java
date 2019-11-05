@@ -53,7 +53,6 @@ public class RegisterServlet extends HttpServlet {
 
             User user = User.createUser(username, password, fullname);
             
-            // Cách 1:
             User userTemp = User.getUserByUsername(username);
             // tạo room chat 1-1 giữa user mới và từng user cũ
             for (User u : userList) {
@@ -63,27 +62,6 @@ public class RegisterServlet extends HttpServlet {
                 roomTemp.insertUserIntoRoom(u.getId());
             }
             
-            // Cách 2:
-            // lấy ra toàn bộ room
-            Room[] roomList = Room.getAllRoom();
-            for (Room room : roomList) {
-                String roomName = room.getName();
-                String[] userOfRoom = roomName.split("-");
-                User user1 = User.getUserByUsername(userOfRoom[0]);
-                User user2 = User.getUserByUsername(userOfRoom[1]);
-                room.insertUserIntoRoom(user1.getId());
-                room.insertUserIntoRoom(user2.getId());
-            }
-            
-            Room[] roomList1 = Room.getAllRoom();
-            for (Room room : roomList) {
-                String roomName = room.getName();
-                String[] userOfRoom = roomName.split("-");
-                User user1 = User.getUserByUsername(userOfRoom[0]);
-                User user2 = User.getUserByUsername(userOfRoom[1]);
-                room.insertUserIntoRoom(user1.getId());
-                room.insertUserIntoRoom(user2.getId());
-            }
         } catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
