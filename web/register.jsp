@@ -47,7 +47,7 @@
                         <div class="form-group" style="margin-left: 35%; margin-bottom: 0; margin-top: 10%">
                             <input type="submit" class="btnSubmit" value="Đăng Ký" />
                         </div>
-                        
+                        <a style="color: blue; margin: auto" href="login.jsp">Quay Lại Đăng Nhập</a>
                     </form>
                 </div>
               

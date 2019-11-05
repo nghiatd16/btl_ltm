@@ -42,7 +42,7 @@
                         <div class="form-group" style="margin-left: 35%; margin-bottom: 0; margin-top: 10%">
                             <input type="submit" class="btnSubmit" value="Đăng Nhập" />
                         </div>
-                        
+                         <a style="color: blue; margin: auto" href="register.jsp">Đăng ký mới</a>
                     </form>
                 </div>
               
