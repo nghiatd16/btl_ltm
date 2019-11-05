@@ -12,6 +12,10 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>authentication.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateRoomServlet</servlet-name>
+        <servlet-class>authentication.CreateRoomServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInServlet</servlet-name>
         <url-pattern>/LogInServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRoomServlet</servlet-name>
+        <url-pattern>/CreateRoomServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

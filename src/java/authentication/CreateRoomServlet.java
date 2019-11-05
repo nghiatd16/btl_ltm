@@ -10,11 +10,13 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Room;
 import model.User;
 
@@ -50,32 +52,31 @@ public class CreateRoomServlet extends HttpServlet {
             out.println("</html>");
         }
 
-        /*
-        * mỗi lần bấm vào thêm người thì sẽ lấy chuỗi ra
-        * bấm tạo thì xử lí nhũng chuỗi vừa nhập
-        */
+        String parameter = request.getParameter("membername");
+        parameter = parameter.trim();
+        String[] listName = parameter.split("-");
+        HttpSession userSession = request.getSession();
+        String userName = (String) userSession.getAttribute("username");
+        Room room = null;
+        try {
+            room = Room.createRoom(userName + "-" +parameter, "1n");
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        String btnThem = request.getParameter("btnThemNguoi");
-        String btnTao = request.getParameter("btnTao");
-        if (btnThem.equals("Thêm Người")) {
-            
-            
-        } else if (btnTao.equals("Tạo")) {
+        for (String name : listName) {
             try {
-                // lấy chuỗi
-                String membername = request.getParameter("membername");
-
-                User user = User.getUserByUsername(membername);
-                Room room = Room.createRoom(membername, "1n");
+                User user = User.getUserByUsername(name);
                 room.insertUserIntoRoom(user.getId());
-
             } catch (SQLException ex) {
                 Logger.getLogger(CreateRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CreateRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
+//        request.getRequestDispatcher("index.jsp").forward(request, response);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -106,7 +107,7 @@ public class CreateRoomServlet extends HttpServlet {
             throws ServletException, IOException {
 
         processRequest(request, response);
-
+        
     }
 
     /**

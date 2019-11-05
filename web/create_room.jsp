@@ -22,16 +22,14 @@
                 <div class="col-md-6 login-form-1" style="margin: auto; max-width: 100%">
                     <h3>Tạo Nhóm</h3>
                     <form action="CreateRoomServlet" method="POST">
-                        <% HttpSession userSession = request.getSession();
-                         %>
                         
                         <div class="form-group">
                             <input type='text' name='membername' class="form-control" placeholder="Tên Thành Viên" value="" required />
                         </div>
                         <div class="form-group" style="margin-left: 35%; margin-bottom: 0; margin-top: 10%">
-                            <input type="submit" name ="btnThemNguoi" class="btnSubmit" value = "Thêm Người"/>
-                            <input type="submit" name ="btnTao" class="btnSubmit" value="Tạo" />
+                            <input type="submit" class="btnSubmit" value="Tạo" />
                         </div>
+                        
                     </form>
                 </div>
               

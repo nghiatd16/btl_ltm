@@ -22,16 +22,6 @@
                 <div class="col-md-6 login-form-1" style="margin: auto; max-width: 100%">
                     <h3>Đăng Ký</h3>
                     <form action="RegisterServlet" method="POST">
-                        <% HttpSession userSession = request.getSession();
-                            String userFullName = (String) userSession.getAttribute("userFullName");
-                            if(userFullName != null && userFullName.length() > 0){
-                                response.sendRedirect("login.jsp");
-                            }
-                        String registerNotigy = (String) request.getAttribute("registerNotigy");
-                            if( registerNotigy != null && registerNotigy.length() > 0 ) {
-                                out.println("<p style='color: red; margin: auto'>" + registerNotigy + "</p>");
-                            }
-                         %>
                          <div class="form-group">
                             <input type="text" name='fullname' class="form-control" placeholder="Họ Tên *" value="" required/>
                         </div>

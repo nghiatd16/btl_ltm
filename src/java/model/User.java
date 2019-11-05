@@ -145,6 +145,19 @@ public class User {
         }
         return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("fullName"));
     }
+    
+    public static User getUserByFullname(String fullname) throws SQLException {
+        Database db = new Database(SystemConfig.MYSQL_HOST, SystemConfig.MYSQL_PORT,
+                SystemConfig.MYSQL_Username, SystemConfig.MYSQL_Password,
+                SystemConfig.MYSQL_TableName);
+        String query = "SELECT * FROM `users` WHERE `fullname`='" + fullname + "';";
+        ResultSet rs = db.executeQuery(query);
+        boolean hasRes = rs.next();
+        if (hasRes == false) {
+            return null;
+        }
+        return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), fullname);
+    }
 
     public static User createUser(String username, String password, String fullName) throws SQLException {
         try {

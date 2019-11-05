@@ -61,12 +61,14 @@ public class RegisterServlet extends HttpServlet {
                 roomTemp.insertUserIntoRoom(userTemp.getId());
                 roomTemp.insertUserIntoRoom(u.getId());
             }
-            
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         } catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
 
     @Override
