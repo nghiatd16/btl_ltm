@@ -138,16 +138,21 @@ public class Room {
         return "Room{" + "id=" + id + ", name=" + name + ", type=" + type + '}';
     }
 
-    public static void insertUserIntoRoom(int userId, int roomId) throws SQLException {
+    public static void insertUserIntoRoom(int userId, int roomId) throws SQLException, ClassNotFoundException {
         Database db = new Database(SystemConfig.MYSQL_HOST, SystemConfig.MYSQL_PORT,
                 SystemConfig.MYSQL_Username, SystemConfig.MYSQL_Password,
                 SystemConfig.MYSQL_TableName);
-        String query = String.format("INSERT INTO `member_of_rooms` (userId, roomId)"
-                + "VALUES (%s, %s);", userId, roomId);
-        db.executeQuery(query);
+        Connection conn = db.getConnection();
+        String query_format = "INSERT INTO `member_of_rooms` (userId, roomId) VALUES (?, ?);";
+        PreparedStatement pstmt = conn.prepareStatement(query_format,
+                Statement.RETURN_GENERATED_KEYS);
+            // set parameters for statement
+        pstmt.setInt(1, userId);
+        pstmt.setInt(2, roomId);
+        pstmt.executeUpdate();
     }
 
-    public void insertUserIntoRoom(int userId) throws SQLException {
+    public void insertUserIntoRoom(int userId) throws SQLException, ClassNotFoundException {
         insertUserIntoRoom(userId, this.id);
     }
 
